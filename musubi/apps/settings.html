@@ -1,0 +1,131 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+       <script type="text/javascript" src="http://mobisocial.stanford.edu/musubi/apps/SocialKit-JS/lib/socialKit-1.js"></script>
+	<script type="text/javascript" src="http://mobisocial.stanford.edu/musubi/apps/SocialKit-JS/jquery-1.5.2.min.js"></script>
+ 
+        <style>
+		html{
+		       background-color: black;     	
+        	}
+       </style>
+
+	<!--
+	Script Explanation:
+	This script sets up two functions, one for setting cookies, which is necessary for transfering theme information
+	between pages, and another which uses the first to save the names entered by the user in the text boxes in cookies, 
+	and redirects to the post page. 
+	-->
+	<script type = "text/javascript">
+		function setCookie(c_name,value,exdays){
+			var exdate=new Date();
+			exdate.setDate(exdate.getDate() + exdays);
+			var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+			document.cookie=c_name + "=" + c_value;
+			window.location='http://mobisocial.stanford.edu/gamecheckin/musubi/apps/settings.html';
+		}
+
+		function setNames(){
+			alert("Saving..."); 
+			var steamName = document.getElementById('steamnametxt').value;
+			var psnName = document.getElementById('psnnametxt').value;
+			setCookie("steamName", steamName, null);
+			setCookie("psnName", psnName, null);
+			window.location='http://mobisocial.stanford.edu/gamecheckin/musubi/apps/post.php?steamName=' + steamName + '&psnName=' + psnName;
+		}
+	</script>
+      
+    <title>Gamer Check-In</title>
+    </head>
+    
+    <!--[BODY]==========[BODY]==========[BODY]==========[BODY]==========[BODY]==========[BODY]==========[BODY]==========[BODY]==========[BODY]==========[BODY]==========-->    
+    <body>
+   	<center>
+
+	<img id = "background" src="http://mobisocial.stanford.edu/gamecheckin/musubi/apps/images/Themes/Alpha/Background.png" height=100% width=100% style="z-index:1;"/>
+
+   	<div id="heading">
+		<a href="about.html">
+		<img id="aboutbutton" src="http://mobisocial.stanford.edu/gamecheckin/musubi/apps/images/Themes/Alpha/AboutButton.png"
+			alt="Broken Img" height=9% width=15% align="middle" style="z-index:3;position:absolute;top:2%;left:6%;"/></a>
+	
+		<img id="settingstitle" src="http://mobisocial.stanford.edu/gamecheckin/musubi/apps/images/Themes/Alpha/SettingsTitle.png"
+			alt="Broken Img" height=16%px width=36% align="middle" style="z-index:3;position:absolute;top:0.1%;left:32%;"/>
+	
+		<a href="GamePortal/index.php">
+		<img id = "menubutton" src="http://mobisocial.stanford.edu/gamecheckin/musubi/apps/images/Themes/Alpha/MenuButton.png"
+			alt="Broken Img" height=7% width=18% align="middle" style="z-index:3;position:absolute;top:2.8%;left:78%;"/></a>
+	</div>
+		
+	<div id="main">
+		<font id="font1" color="white" size=5pt style="z-index:3;position:absolute;top:22%;left:25%;"><strong>Account Login</strong></font>
+		<font id="font2" color="white" style="z-index:3;position:absolute;top:33%;left:10%;"><strong>Enter Steam Id:  </strong></font>
+			<input id="steamnametxt"  type"text" style="z-index:3;position:absolute;top:39%;left:20%"/>
+		<font id="font3" color="white" style="z-index:2;position:absolute;top:50%;left:10%;"><strong>Enter PSN Id:  </strong></font>
+			<input id="psnnametxt"  type"text" style="z-index:4;position:absolute;top:56%;left:20%;"/>
+	</div>
+
+	<button id="submitbutton" onclick="setNames();" style="z-index:2;position:absolute;top:65%;left:38%;">Submit</button>
+
+	</div style="padding-top:20px">
+		<div id="Themes" style="padding-top:20px">
+		<select id="theme_dropdown" onchange=setCookie("themename",value,null)
+			style="z-index:2;position:absolute;top:76%;left:32%;">
+			<option>Select Theme</option>
+			<option value="Alpha">Alpha</option>
+			<option value="Dark Wood">Dark Wood</option>
+			<option value="Light Wood">Light Wood</option>
+			<option value="Smoke">Smoke</option>
+			<option value="Steampunk">Steampunk</option>
+			<option value="Unicorn">Unicorn</option>
+		</select>
+	</div>
+
+	<!--
+	Script Explanation:
+	This script retrieves three cookies, one for the theme, and one for each of the usernames saved by the user.
+	The theme cookie resets all of the image paths and the username cookies have the usernames show up in the textboxes
+	when the user goes to the settings menu.
+	-->
+	<script>
+		function getCookie(c_name){
+			var i,x,y,ARRcookies=document.cookie.split(";");
+			for (i=0;i<ARRcookies.length;i++){
+				x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+			  	y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+				x=x.replace(/^\s+|\s+$/g,"");
+				if (x==c_name){
+					return unescape(y);
+			    	}
+			}
+		}
+		
+		var steamnametxt = getCookie("steamName"); 
+		var psnnametxt = getCookie("psnName");
+		if(steamnametxt != null)
+	       	document.getElementById('steamnametxt').value = steamnametxt; 
+	       if(psnnametxt != null)	
+	              document.getElementById('psnnametxt').value = psnnametxt; 
+
+		var theme = getCookie("themename");	
+
+	       if(theme != null){
+			$(function() {
+				$("#aboutbutton").attr("src", "http://mobisocial.stanford.edu/gamecheckin/musubi/apps/images/Themes/" + theme + "/AboutButton.png");
+				$("#settingstitle").attr("src", "http://mobisocial.stanford.edu/gamecheckin/musubi/apps/images/Themes/" + theme + "/SettingsTitle.png");
+				$("#background").attr("src", "http://mobisocial.stanford.edu/gamecheckin/musubi/apps/images/Themes/" + theme + "/Background.png");
+				$("#menubutton").attr("src", "http://mobisocial.stanford.edu/gamecheckin/musubi/apps/images/Themes/" + theme + "/MenuButton.png");
+				if(theme == "Steampunk"){
+					var style_addition = "background-color:rgba(178,34,34,0.6);";
+					$("#font1").attr("style", $("#font1").attr("style") + style_addition);
+					$("#font2").attr("style", $("#font2").attr("style") + style_addition);
+					$("#font3").attr("style", $("#font3").attr("style") + style_addition);
+				}		
+			});
+		}
+	</script>	
+	
+	<script type="text/javascript" src="app.js"></script>
+   	</center>
+     </body>
+</html>

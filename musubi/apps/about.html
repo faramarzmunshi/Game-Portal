@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <script type="text/javascript" src="http://mobisocial.stanford.edu/musubi/apps/SocialKit-JS/lib/socialKit-1.js"></script>
+	   <script type="text/javascript" src="http://mobisocial.stanford.edu/musubi/apps/SocialKit-JS/jquery-1.5.2.min.js"></script>
+
+        
+        <style type="text/css">
+        
+        	html{
+        	background-color: black;
+        	
+        	}
+        	
+        	#textbody{
+        	color:white;
+        	}
+
+        </style>
+        
+    <title>Gamer Check-In</title>
+    </head>
+    
+    <!--BODY===========================================================================-->
+    
+    <body>
+
+   	<center>
+
+	<img id = "background" src="http://mobisocial.stanford.edu/gamecheckin/musubi/apps/images/Themes/Alpha/Background.png" height=100% width=100% style="z-index:1;"/>
+
+   	<div id="heading">
+
+	<a href="GamePortal/index.php">
+	<img id="menubutton" src="http://mobisocial.stanford.edu/gamecheckin/musubi/apps/images/Themes/Alpha/MenuButton.png" height=7% width=18% align="middle"
+		style="z-index:3;position:absolute;top:2.8%;left:6%;"/></a>
+
+	<img id="abouttitle" src="http://mobisocial.stanford.edu/gamecheckin/musubi/apps/images/Themes/Alpha/AboutTitle.png" height=16%px width=36% align="middle"
+		style="z-index:3;position:absolute;top:0.1%;left:32%;"/>
+
+	<a href="settings.html">
+	<img id = "settingsbutton" src="http://mobisocial.stanford.edu/gamecheckin/musubi/apps/images/Themes/Alpha/SettingsButton.png" height=7% width=18% align="middle"
+		style="z-index:3;position:absolute;top:2.8%;left:78%;" /></a>
+
+	</div>
+	
+	<div id="par" style="position:absolute;z-index:3;position:absolute;top:15%;">
+	<p id="textbody" ><strong>
+	"Game Portal" is a simple web-app designed for Musubi that aggregates all the
+       user data across the three gaming networks (Xbox, Playstation, and Steam), and
+       allows a user to "Check-in" or tell their friends what they are playing, at the
+       click of a button. There is a one time set-up where the user provides his/her 
+       usernames for each network, but the application remembers the usernames thereafter
+       to provide the most convenience for the user. "Game Portal" aims to bridge the gap
+	between the networks by allowing visibility of a friend's online/offline state
+	between the networks simply through a check-in button. For example, if I were to
+	be playing on Steam and a friend was playing a multiplayer game on Xbox, I would never
+	be able to find out what they were playing without having to manually start up my
+	Xbox and check their game status. With "Game Portal," all I would have to access is
+	the one stop shop, where it tells you what games your friends are playing simply by
+	checking the Musubi Feed. The seamless integration between the networks, and the
+	simplicity of the application on the front-end, is exactly the aspect in which
+	"Game Portal" prides itself.
+	</strong>
+	</p>
+	
+	
+	</div>
+	</center>
+
+
+	<script>
+	function getCookie(c_name){
+		var i,x,y,ARRcookies=document.cookie.split(";");
+		for (i=0;i<ARRcookies.length;i++){
+			x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+		  	y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+			x=x.replace(/^\s+|\s+$/g,"");
+			if (x==c_name){
+				return unescape(y);
+		    	}
+		}
+	}
+
+	var theme = getCookie("themename");	
+	if(theme!=null){
+		$(function() {
+			$("#settingsbutton").attr("src", "http://mobisocial.stanford.edu/gamecheckin/musubi/apps/images/Themes/" + theme + "/SettingsButton.png");
+			$("#abouttitle").attr("src", "http://mobisocial.stanford.edu/gamecheckin/musubi/apps/images/Themes/" + theme + "/AboutTitle.png");
+			$("#background").attr("src", "http://mobisocial.stanford.edu/gamecheckin/musubi/apps/images/Themes/" + theme + "/Background.png");
+			$("#menubutton").attr("src", "http://mobisocial.stanford.edu/gamecheckin/musubi/apps/images/Themes/" + theme + "/MenuButton.png");
+			if(theme == "Steampunk"){
+				var style_addition = "background-color:rgba(178,34,34,0.6);";
+				$("#par").attr("style", $("#par").attr("style") + style_addition);
+			}
+			if(theme == "Smoke"){
+				var style_addition = "background-color:rgba(71,160,160,0.6);";
+				$("#par").attr("style", $("#par").attr("style") + style_addition);
+			}		
+		});
+	}
+	</script>
+	</body>
+	
+	</html>
+	
